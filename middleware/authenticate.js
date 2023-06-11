@@ -5,7 +5,9 @@ const authenticate=async (req,res,next)=>{
     // const 
     try {
         const token=req.cookies.jwt;
+        console.log(token);
         const verify=jwt.verify(token,process.env.SECRET_KEY);
+        console.log(verify);
         if(!verify){
             return res.status(400).send("Login First")
         }
@@ -13,6 +15,7 @@ const authenticate=async (req,res,next)=>{
         if(!userExist){
             return res.status(400).send("User does not Exist")
         }
+        console.log(userExist);
         req.token=token;
         req.user=userExist;
         req.id=userExist._id;
