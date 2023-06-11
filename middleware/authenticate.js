@@ -5,6 +5,8 @@ const authenticate=async (req,res,next)=>{
     // const 
     try {
         console.log("authenticate");
+        console.log(req.body);
+        console.log(req.headers);
         const token=req.headers['authorization'];
         console.log(token);
         const verify=jwt.verify(token,process.env.SECRET_KEY);
