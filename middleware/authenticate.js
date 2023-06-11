@@ -8,13 +8,8 @@ const authenticate=async (req,res,next)=>{
         console.log(req.body);
         console.log(req.headers.authorization);
         const token=req.headers.authorization;
-        console.log(token);
-        const tokenValue=token;
+        var tokenValue=token;
         if(token.startsWith('Bearer ')){
-            console.log("inside")
-            console.log(token.split(' ')[1])
-            console.log(token.split(" ")[1])
-            console.log(token.replace('Bearer ',''))
             tokenValue=token.split(' ')[1];
         }
         console.log(tokenValue);
