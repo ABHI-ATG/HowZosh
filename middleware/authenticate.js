@@ -4,8 +4,9 @@ const User=require('../models/user')
 const authenticate=async (req,res,next)=>{
     // const 
     try {
-        const token=req.headers['Authorization'].split(' ')[1];
         console.log("token");
+        console.log(req.headers);
+        const token=req.headers['Authorization'].split(' ')[1];
         console.log(token);
         const verify=jwt.verify(token,process.env.SECRET_KEY);
         console.log(verify);
