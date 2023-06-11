@@ -61,6 +61,7 @@ const signin=async (req,res)=>{
 
 const logout=async (req,res)=>{
     try {
+        console.log(req.cookies.jwt);
         res.clearCookie('jwt');
         res.status(200).send("Logout Successfully")
     } catch (error) {

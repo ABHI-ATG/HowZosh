@@ -6,7 +6,6 @@ const dashboard = async (req,res)=>{
         const data=await Chat.find({
             $or:[{user1:req.id},{user2:req.id}]
         }).populate('user1','name').populate('user2','name')
-        console.log(data);
         res.status(200).json(data)
     } catch (error) {
         res.status(400).send("Eror in loading Dashboard")
@@ -16,6 +15,7 @@ const dashboard = async (req,res)=>{
 
 const search = async (req,res)=>{
     try {
+        console.log(req);
         const alreadyExist=await Chat.find({
             $or:[{user1:req.id},{user2:req.id}]
         },{user1:1,user2:1,_id:0});
