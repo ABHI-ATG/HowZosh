@@ -3,9 +3,11 @@ const Chat=require('../models/chat')
 
 const dashboard = async (req,res)=>{
     try {
+        console.log("dashboard");
         const data=await Chat.find({
             $or:[{user1:req.id},{user2:req.id}]
         }).populate('user1','name').populate('user2','name')
+        console.log(data);
         res.status(200).json(data)
     } catch (error) {
         res.status(400).send("Eror in loading Dashboard")
@@ -15,6 +17,7 @@ const dashboard = async (req,res)=>{
 
 const search = async (req,res)=>{
     try {
+        console.log("search");
         console.log(req);
         const alreadyExist=await Chat.find({
             $or:[{user1:req.id},{user2:req.id}]
@@ -33,6 +36,7 @@ const search = async (req,res)=>{
                 {_id:obj}
             ))
         },{name:1});
+        console.log(data);
         res.status(200).json(data)
     } catch (error) {
         res.status(400).send("Eror in serch")
@@ -42,6 +46,7 @@ const search = async (req,res)=>{
 
 const create=async(req,res)=>{
     try {
+        console.log("create");
         const {sender,reciever}=req.body;
         const data=await Chat.findOne({$or:[{user1:sender,user2:reciever},{user2:sender,user1:reciever}]})
         if(data){
@@ -65,15 +70,15 @@ const create=async(req,res)=>{
 
 const send=async(req,res)=>{
     try {
+        console.log("send");
         const {chatId,senderId,message}=req.body;
         const data=await Chat.findOne({_id:chatId})
+        console.log(data);
         if(data){
             const info={sender:senderId,content:message};
             data.message.push(info)
             await data.save();
             const truncMessage=message.substring(0,20)+"...";
-            console.log(data.user1);
-            console.log(req.id);
             if(data.user1.equals(req.id)){
                 console.log('same');
                 await Chat.updateOne({_id:chatId},{ $set: {latest: truncMessage},$inc:{pending2:1}})
@@ -92,8 +97,10 @@ const send=async(req,res)=>{
 
 const deleteNotification=async (req,res)=>{
     try {
+        console.log("notification");
         const {chatId}=req.body;
         const data=await Chat.findOne({_id:chatId})
+        console.log(data);
         if(data){
             await Chat.updateOne({_id:chatId},{ $set: {pending1: 0,pending2:0}})
             res.status(200).send('Notification deleted successfully')
