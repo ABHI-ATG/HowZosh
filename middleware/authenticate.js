@@ -11,7 +11,11 @@ const authenticate=async (req,res,next)=>{
         console.log(token);
         const tokenValue=token;
         if(token.startsWith('Bearer ')){
+            console.log("inside")
             tokenValue=token.split(' ')[1];
+            console.log(token.split(' ')[1])
+            console.log(token.split(" ")[1])
+            console.log(token.replace('Bearer ',''))
         }
         console.log(tokenValue);
         const verify=jwt.verify(tokenValue,process.env.SECRET_KEY);
