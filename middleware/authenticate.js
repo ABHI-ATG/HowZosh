@@ -6,8 +6,9 @@ const authenticate=async (req,res,next)=>{
     try {
         console.log("authenticate");
         console.log(req.body);
-        console.log(req.headers);
-        const token=req.headers['authorization'];
+        console.log(req.headers.authorization);
+        const token=req.headers.authorization;
+        console.log(token);
         if(token.startsWith('Bearer ')){
             token=token.replace('Bearer ','');
         }
