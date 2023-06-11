@@ -14,7 +14,7 @@ require('./config/db')()
 const port = process.env.PORT||5000
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'https://funny-halva-a4a187.netlify.app/');
+    res.header('Access-Control-Allow-Origin', 'https://funny-halva-a4a187.netlify.app');
     res.header(
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept'
@@ -63,7 +63,7 @@ const server=app.listen(port,()=>console.log(`Port running at ${port}`))
 const io=require('socket.io')(server,{
   pingTimeout:60000,
   cors:{
-    origin:"https://funny-halva-a4a187.netlify.app/"
+    origin:"https://funny-halva-a4a187.netlify.app"
   }
 })
 
