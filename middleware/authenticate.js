@@ -9,11 +9,12 @@ const authenticate=async (req,res,next)=>{
         console.log(req.headers.authorization);
         const token=req.headers.authorization;
         console.log(token);
+        const tokenValue=token;
         if(token.startsWith('Bearer ')){
-            token=token.split(' ')[1];
+            tokenValue=token.split(' ')[1];
         }
-        console.log(token);
-        const verify=jwt.verify(token,process.env.SECRET_KEY);
+        console.log(tokenValue);
+        const verify=jwt.verify(tokenValue,process.env.SECRET_KEY);
         console.log(verify)
         if(!verify){
             return res.status(400).send("Login First")
