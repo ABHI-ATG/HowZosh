@@ -63,7 +63,7 @@ const server=app.listen(port,()=>console.log(`Port running at ${port}`))
 const io=require('socket.io')(server,{
   pingTimeout:60000,
   cors:{
-    origin:"http://localhost:3000"
+    origin:"https://funny-halva-a4a187.netlify.app/"
   }
 })
 
