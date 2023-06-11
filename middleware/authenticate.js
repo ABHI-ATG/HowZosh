@@ -5,6 +5,7 @@ const authenticate=async (req,res,next)=>{
     // const 
     try {
         const token=req.cookies.jwt;
+        console.log("token");
         console.log(token);
         const verify=jwt.verify(token,process.env.SECRET_KEY);
         console.log(verify);
